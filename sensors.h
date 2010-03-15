@@ -12,5 +12,5 @@ typedef enum{
 
 void sensors_setup(void);
 int read_adc(uint8_t);
-int read_sonar();
+int read_sonar(void);
 #endif // SENSORS_H

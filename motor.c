@@ -26,23 +26,23 @@ void motor_set_speed(motor_side side, motor_command state, uint8_t speed){
     case MOTOR_LEFT:
       switch (state){
 	case MOTOR_FORWARD:
-	  PORTC |=  _BV(PC0); // fwd high
-	  PORTC &= ~_BV(PC1); // rev low
+	  PORTC |=  _BV(PC1); // fwd high
+	  PORTC &= ~_BV(PC0); // rev low
 	  OCR1A = speed;
 	  break;
 	case MOTOR_REVERSE:
-	  PORTC &= ~_BV(PC0); // fwd low
-	  PORTC |=  _BV(PC1); // rev high
+	  PORTC &= ~_BV(PC1); // fwd low
+	  PORTC |=  _BV(PC0); // rev high
 	  OCR1A = speed;
 	  break;
 	case MOTOR_BRAKE:
-	  PORTC |= _BV(PC0); // fwd high
-	  PORTC |= _BV(PC1); // rev high
+	  PORTC |= _BV(PC1); // fwd high
+	  PORTC |= _BV(PC0); // rev high
 	  OCR1A = speed;
 	  break;
 	case MOTOR_COAST:
-	  PORTC &= ~_BV(PC0); // fwd low
-	  PORTC &= ~_BV(PC1); // rev low
+	  PORTC &= ~_BV(PC1); // fwd low
+	  PORTC &= ~_BV(PC0); // rev low
 	  OCR1A = 0;
 	  break;
       }
@@ -50,23 +50,23 @@ void motor_set_speed(motor_side side, motor_command state, uint8_t speed){
     case MOTOR_RIGHT:
       switch (state){
 	case MOTOR_FORWARD:
-	  PORTC |=  _BV(PC2); // fwd high
-	  PORTC &= ~_BV(PC3); // rev low
+	  PORTC |=  _BV(PC3); // fwd high
+	  PORTC &= ~_BV(PC2); // rev low
 	  OCR1B = speed;
 	  break;
 	case MOTOR_REVERSE:
-	  PORTC &= ~_BV(PC2); // fwd low
-	  PORTC |=  _BV(PC3); // rev high
+	  PORTC &= ~_BV(PC3); // fwd low
+	  PORTC |=  _BV(PC2); // rev high
 	  OCR1B = speed;
 	  break;
 	case MOTOR_BRAKE:
-	  PORTC |= _BV(PC2); // fwd high
-	  PORTC |= _BV(PC3); // rev high
+	  PORTC |= _BV(PC3); // fwd high
+	  PORTC |= _BV(PC2); // rev high
 	  OCR1B = speed;
 	  break;
 	case MOTOR_COAST:
-	  PORTC &= ~_BV(PC2); // fwd low
-	  PORTC &= ~_BV(PC3); // rev low
+	  PORTC &= ~_BV(PC3); // fwd low
+	  PORTC &= ~_BV(PC2); // rev low
 	  OCR1B = 0;
 	  break;
       }

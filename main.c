@@ -14,11 +14,21 @@ void setup(void){
 
 int main(void){
   setup();
-  uint8_t speed;
+  uint8_t left, right;
+
   while (1){
-    speed = read_sonar();
-    //motor_set_speed(MOTOR_LEFT, MOTOR_FORWARD, speed);
-    _delay_ms(100);
+    switch(state){
+      case SEEK:
+	break;
+      case TARGET:
+	break;
+      case ATTACK:
+	break;
+      case EVADE:
+	break;
+      case STOP:
+	break;
+    }
   }
   return 0;
 }
