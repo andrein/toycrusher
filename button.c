@@ -4,6 +4,8 @@
 // 62*252 = 15624
 // prescaler = 1024
 
+extern robot_state state;
+
 void button_setup(){
   DDRD  &= ~_BV(DDD2); // set PD2/INTO pin as input
   PORTD |= _BV(PD2);   // enable pull-up
@@ -15,7 +17,6 @@ void button_setup(){
 ISR(INT0_vect)
 {
   GICR &= ~_BV(INT0); // disable INT0 to prevent bouncing
-  
   TCCR0 |= _BV(WGM01); // set timer0 in CTC mode
   TIMSK |= _BV(OCIE0); // enable Output Compare Match Interrupt
   TCCR0 |= _BV(CS02) | _BV(CS00); // set prescaler = 1024
@@ -32,5 +33,6 @@ ISR(TIMER0_COMP_vect){
     TIMSK &= ~_BV(OCIE0); // disable Output Compare Match Interrupt
     TCCR0 = 0; //disable timer0
     i = 0;
+    GICR |= _BV(INT0); // re-enable INT0;
   }
 }

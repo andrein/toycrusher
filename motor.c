@@ -1,3 +1,4 @@
+#include "global.h"
 #include "motor.h"
 
 void motor_setup(){
@@ -20,11 +21,11 @@ void motor_setup(){
 }
 
 
-void motor_set_speed(motor_side side, motor_command state, uint8_t speed){
-  printf("DEBUG: motor_set_speed(): side=%u, state=%u, speed=%u\n", side, state, speed);
+void motor_set_speed(motor_side side, motor_command command, uint8_t speed){
+  printf("DEBUG: motor_set_speed(): side=%u, command=%u, speed=%u\n", side, command, speed);
   switch(side){
     case MOTOR_LEFT:
-      switch (state){
+      switch (command){
 	case MOTOR_FORWARD:
 	  PORTC |=  _BV(PC1); // fwd high
 	  PORTC &= ~_BV(PC0); // rev low
@@ -48,7 +49,7 @@ void motor_set_speed(motor_side side, motor_command state, uint8_t speed){
       }
       break;
     case MOTOR_RIGHT:
-      switch (state){
+      switch (command){
 	case MOTOR_FORWARD:
 	  PORTC |=  _BV(PC3); // fwd high
 	  PORTC &= ~_BV(PC2); // rev low
@@ -72,4 +73,39 @@ void motor_set_speed(motor_side side, motor_command state, uint8_t speed){
       }
       break;
   }
+}
+
+void go_forward(uint8_t speed){
+  motor_set_speed(MOTOR_LEFT,  MOTOR_FORWARD, speed);
+  motor_set_speed(MOTOR_RIGHT, MOTOR_FORWARD, speed);
+}
+
+void go_reverse(uint8_t speed){
+  motor_set_speed(MOTOR_LEFT,  MOTOR_REVERSE, speed);
+  motor_set_speed(MOTOR_RIGHT, MOTOR_REVERSE, speed);
+}
+
+void spin_right(uint8_t speed){
+  motor_set_speed(MOTOR_LEFT,  MOTOR_FORWARD, speed);
+  motor_set_speed(MOTOR_RIGHT, MOTOR_REVERSE, speed);
+}
+
+void spin_left(uint8_t speed){
+  motor_set_speed(MOTOR_LEFT,  MOTOR_REVERSE, speed);
+  motor_set_speed(MOTOR_RIGHT, MOTOR_FORWARD, speed);
+}
+
+void steer_right(uint8_t speed){
+  motor_set_speed(MOTOR_LEFT,  MOTOR_FORWARD, speed);
+  motor_set_speed(MOTOR_RIGHT, MOTOR_BRAKE, speed);
+}
+
+void steer_left(uint8_t speed){
+  motor_set_speed(MOTOR_LEFT,  MOTOR_BRAKE, speed);
+  motor_set_speed(MOTOR_RIGHT, MOTOR_FORWARD, speed);
+}
+
+void brake(){
+  motor_set_speed(MOTOR_LEFT,  MOTOR_BRAKE, 255);
+  motor_set_speed(MOTOR_RIGHT, MOTOR_BRAKE, 255);
 }

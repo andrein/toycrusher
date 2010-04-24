@@ -10,13 +10,11 @@
 #include <stdio.h>
 
 typedef enum{
-  STOP,
+  STOP=0,
   SEEK,
   TARGET,
   ATTACK,
   EVADE
 }robot_state;
-
-volatile robot_state state;
 
 #endif // GLOBAL_H

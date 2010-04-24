@@ -162,7 +162,7 @@ CC=avr-gcc
 OBJCOPY=avr-objcopy
 OBJDUMP=avr-objdump
 SIZE=avr-size
-AVRDUDE=avrdude
+AVRDUDE=/opt/cross/bin/avrdude
 REMOVE=rm -f
 
 ##### automatic target names ####

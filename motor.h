@@ -18,4 +18,11 @@ typedef enum{
 void motor_setup(void);
 void motor_set_speed(motor_side, motor_command, uint8_t);
 
+void go_forward(uint8_t);
+void go_reverse(uint8_t);
+void spin_right(uint8_t);
+void spin_left(uint8_t);
+void steer_right(uint8_t);
+void steer_left(uint8_t);
+void brake(void);
 #endif // MOTOR_H
